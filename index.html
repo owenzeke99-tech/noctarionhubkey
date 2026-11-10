@@ -1,0 +1,590 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NOCTARION HUB</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    background: #050505;
+    color: white;
+    font-family: 'Rajdhani', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    overflow: hidden;
+}
+
+.background {
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(ellipse at center,#202020,#080808 65%,#020202);
+    overflow: hidden;
+    z-index: 0;
+}
+
+.grid {
+    position: absolute;
+    inset: -100%;
+    background-image:
+        linear-gradient(#ffffff09 1px,transparent 1px),
+        linear-gradient(90deg,#ffffff09 1px,transparent 1px);
+    background-size: 48px 48px;
+    transform: perspective(450px) rotateX(55deg);
+    animation: gridMove 18s linear infinite;
+}
+
+@keyframes gridMove {
+    to { background-position: 0 96px; }
+}
+
+.glow {
+    position: absolute;
+    width: 450px;
+    height: 450px;
+    border-radius: 50%;
+    background: #aaa;
+    filter: blur(190px);
+    opacity: .12;
+    animation: glowMove 12s ease-in-out infinite alternate;
+}
+
+.glow.a {
+    top: -250px;
+    left: -150px;
+}
+
+.glow.b {
+    bottom: -280px;
+    right: -150px;
+    animation-delay: -6s;
+}
+
+@keyframes glowMove {
+    to { transform: translate(130px,100px) scale(1.3); }
+}
+
+.particle {
+    position: absolute;
+    border-radius: 50%;
+    background: #ddd;
+    box-shadow: 0 0 12px #fff;
+    animation: floatParticle linear infinite;
+}
+
+@keyframes floatParticle {
+    0% {
+        transform: translateY(110vh) translateX(0) scale(0);
+        opacity: 0;
+    }
+    20% { opacity: .8; }
+    100% {
+        transform: translateY(-10vh) translateX(70px) scale(1.5);
+        opacity: 0;
+    }
+}
+
+.space-ring {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    border: 1px solid #ffffff10;
+    border-radius: 50%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    animation: ringSpin 35s linear infinite;
+}
+
+.space-ring::before,
+.space-ring::after {
+    content: "";
+    position: absolute;
+    inset: 35px;
+    border: 1px dashed #ffffff12;
+    border-radius: 50%;
+}
+
+.space-ring::after {
+    inset: 90px;
+    border-style: solid;
+}
+
+@keyframes ringSpin {
+    to { transform: translate(-50%,-50%) rotate(360deg); }
+}
+
+/* MAIN CARD */
+.container {
+    width: 100%;
+    max-width: 430px;
+    position: relative;
+    z-index: 2;
+    padding: 35px 27px 27px;
+    border-radius: 25px;
+    text-align: center;
+    background: linear-gradient(145deg,#202020,#090909 65%);
+    border: 1px solid #666;
+    box-shadow: 0 25px 90px #000,
+                0 0 35px #ffffff12,
+                inset 0 1px 1px #ffffff30;
+    backdrop-filter: blur(20px);
+    animation: cardAppear 1s ease;
+}
+
+@keyframes cardAppear {
+    from {
+        opacity: 0;
+        transform: translateY(60px) scale(.9);
+        filter: blur(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+    }
+}
+
+.container::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: 25px;
+    border: 1px solid #ffffff35;
+    pointer-events: none;
+    animation: cardBorder 4s ease-in-out infinite;
+}
+
+@keyframes cardBorder {
+    50% {
+        border-color: #ffffffaa;
+        box-shadow: 0 0 25px #ffffff20;
+    }
+}
+
+/* STRAIGHT PREMIUM N LOGO */
+.logo-wrap {
+    width: 105px;
+    height: 105px;
+    position: relative;
+    margin: 0 auto 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: logoFloat 4s ease-in-out infinite;
+}
+
+.logo-ring {
+    position: absolute;
+    inset: 4px;
+    border: 1px solid #aaa;
+    border-radius: 24px;
+    transform: rotate(0deg);
+    box-shadow: 0 0 18px #ffffff30;
+    animation: ringGlow 3s ease-in-out infinite;
+}
+
+.logo-ring::before {
+    content: "";
+    position: absolute;
+    inset: 7px;
+    border: 1px solid #ffffff35;
+    border-radius: 17px;
+}
+
+.logo-ring::after {
+    content: "";
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    top: -4px;
+    left: 50%;
+    border-radius: 50%;
+    background: white;
+    box-shadow: 0 0 15px white;
+}
+
+@keyframes ringGlow {
+    50% {
+        border-color: #fff;
+        box-shadow: 0 0 25px #ffffff55;
+    }
+}
+
+.logo {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 58px;
+    font-weight: 900;
+    font-style: normal;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(
+        180deg,
+        #ffffff 0%,
+        #d8d8d8 35%,
+        #888888 65%,
+        #eeeeee 100%
+    );
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+    filter: drop-shadow(0 3px 2px #000)
+            drop-shadow(0 0 12px #ffffff70);
+    transform: none;
+    z-index: 2;
+}
+
+@keyframes logoFloat {
+    50% { transform: translateY(-8px); }
+}
+
+/* TITLE */
+.title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(23px,6vw,29px);
+    font-weight: 900;
+    letter-spacing: 3px;
+    background: linear-gradient(90deg,#777,white,#aaa,white,#777);
+    background-size: 250% auto;
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+    animation: titleShine 6s linear infinite;
+}
+
+@keyframes titleShine {
+    to { background-position: 250% center; }
+}
+
+.subtitle {
+    margin-top: 11px;
+    color: #888;
+    letter-spacing: 5px;
+    font-size: 12px;
+}
+
+.divider {
+    width: 100px;
+    height: 2px;
+    margin: 21px auto;
+    background: #aaa;
+    box-shadow: 0 0 15px white;
+    animation: dividerPulse 3s ease-in-out infinite;
+}
+
+@keyframes dividerPulse {
+    50% { width: 160px; opacity: .4; }
+}
+
+/* STATUS */
+.status {
+    display: table;
+    margin: auto;
+    padding: 8px 17px;
+    border-radius: 30px;
+    border: 1px solid #555;
+    background: #111;
+    color: #ddd;
+    font-size: 12px;
+    letter-spacing: 2px;
+}
+
+.status-dot {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin-right: 7px;
+    border-radius: 50%;
+    background: #ddd;
+    box-shadow: 0 0 10px white;
+    animation: dotBlink 1.5s infinite;
+}
+
+@keyframes dotBlink {
+    50% { opacity: .2; }
+}
+
+/* KEY MENU */
+.key-section {
+    margin-top: 30px;
+    text-align: left;
+}
+
+.key-label {
+    color: #ddd;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+}
+
+.key-menu {
+    position: relative;
+    padding: 19px 15px;
+    border-radius: 13px;
+    overflow: hidden;
+    background: #080808;
+    border: 1px solid #555;
+    box-shadow: inset 0 0 20px #ffffff08,
+                0 0 15px #ffffff08;
+    transition: .4s ease;
+}
+
+.key-menu:hover {
+    border-color: #ddd;
+    box-shadow: 0 0 20px #ffffff20,
+                inset 0 0 25px #ffffff10;
+    transform: translateY(-3px);
+}
+
+.key-menu::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(90deg,transparent,#ffffff13,transparent);
+    transform: skewX(-20deg);
+    animation: keySweep 6s ease-in-out infinite;
+}
+
+@keyframes keySweep {
+    0%,20% { left: -100%; }
+    75%,100% { left: 150%; }
+}
+
+.key-menu::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 13px;
+    border: 1px solid #ffffff15;
+    pointer-events: none;
+    animation: keyBorderGlow 3s ease-in-out infinite;
+}
+
+@keyframes keyBorderGlow {
+    50% { border-color: #ffffff65; }
+}
+
+.key-text {
+    position: relative;
+    z-index: 2;
+    color: #e5e5e5;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.7;
+    text-align: center;
+    word-break: break-all;
+}
+
+/* COPY BUTTON */
+.copy-btn {
+    width: 100%;
+    margin-top: 18px;
+    padding: 16px;
+    border-radius: 12px;
+    border: 1px solid #999;
+    background: linear-gradient(120deg,#333,#101010,#333);
+    color: white;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: .3s;
+    box-shadow: 0 0 20px #ffffff15;
+}
+
+.copy-btn:hover {
+    transform: translateY(-4px);
+    border-color: white;
+    box-shadow: 0 0 30px #ffffff40;
+}
+
+.copy-btn:active {
+    transform: scale(.96);
+}
+
+.copy-btn::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    height: 100%;
+    width: 70%;
+    background: linear-gradient(90deg,transparent,#ffffff40,transparent);
+    transform: skewX(-25deg);
+    animation: buttonSweep 4s infinite;
+}
+
+@keyframes buttonSweep {
+    to { left: 150%; }
+}
+
+.copy-btn span {
+    position: relative;
+    z-index: 2;
+}
+
+/* FOOTER */
+.footer {
+    margin-top: 26px;
+    padding-top: 18px;
+    border-top: 1px solid #ffffff15;
+    color: #777;
+    font-size: 11px;
+    letter-spacing: 3px;
+    line-height: 1.7;
+}
+
+.mouse-light {
+    position: fixed;
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    background: white;
+    filter: blur(130px);
+    opacity: .07;
+    pointer-events: none;
+    z-index: 1;
+    transform: translate(-50%,-50%);
+}
+
+@media(max-width:480px) {
+    .container {
+        padding: 30px 20px 24px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="background">
+    <div class="grid"></div>
+    <div class="glow a"></div>
+    <div class="glow b"></div>
+    <div class="space-ring"></div>
+</div>
+
+<div class="mouse-light" id="mouseLight"></div>
+
+<script>
+const bg = document.querySelector(".background");
+
+for(let i = 0; i < 65; i++) {
+    const p = document.createElement("div");
+    p.className = "particle";
+    const size = Math.random() * 3 + 1;
+    p.style.width = size + "px";
+    p.style.height = size + "px";
+    p.style.left = Math.random() * 100 + "%";
+    p.style.animationDuration = (5 + Math.random() * 12) + "s";
+    p.style.animationDelay = Math.random() * 10 + "s";
+    bg.appendChild(p);
+}
+
+document.addEventListener("mousemove", e => {
+    const light = document.getElementById("mouseLight");
+    light.style.left = e.clientX + "px";
+    light.style.top = e.clientY + "px";
+});
+</script>
+
+<main class="container">
+
+    <div class="logo-wrap">
+        <div class="logo-ring"></div>
+        <div class="logo">N</div>
+    </div>
+
+    <h1 class="title">NOCTARION HUB</h1>
+    <p class="subtitle">PREMIUM KEY SYSTEM</p>
+
+    <div class="divider"></div>
+
+    <div class="status">
+        <span class="status-dot"></span>
+        SYSTEM ONLINE
+    </div>
+
+    <section class="key-section">
+        <div class="key-label">✦ YOUR ACCESS KEY</div>
+
+        <div class="key-menu">
+            <div class="key-text" id="key">
+                NoctarionHubkeyLajowow - Kapwowjwnoaoej
+            </div>
+        </div>
+
+        <button class="copy-btn" onclick="copyKey()">
+            <span id="buttonText">✧ COPY KEY ✧</span>
+        </button>
+    </section>
+
+    <footer class="footer">
+        NOCTARION HUB © 2026
+        <br>
+        ADVANCED • SECURE • PREMIUM
+    </footer>
+
+</main>
+
+<script>
+function copyKey() {
+    const key = document.getElementById("key").innerText.trim();
+    const buttonText = document.getElementById("buttonText");
+
+    function success() {
+        buttonText.innerText = "✓ COPIED SUCCESSFULLY";
+        setTimeout(() => {
+            buttonText.innerText = "✧ COPY KEY ✧";
+        }, 2000);
+    }
+
+    function fallback() {
+        const area = document.createElement("textarea");
+        area.value = key;
+        area.style.position = "fixed";
+        area.style.opacity = "0";
+        document.body.appendChild(area);
+        area.select();
+
+        try {
+            document.execCommand("copy");
+            success();
+        } catch(e) {
+            buttonText.innerText = "COPY FAILED";
+        }
+
+        area.remove();
+    }
+
+    if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(key).then(success).catch(fallback);
+    } else {
+        fallback();
+    }
+}
+</script>
+
+</body>
+</html>
